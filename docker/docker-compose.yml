@@ -1,0 +1,40 @@
+version: '3.9'
+
+networks:
+  lamp_network:
+    external: true
+
+services:
+  pangpang-php8-apache:
+    build: ./apachePHP8/
+    container_name: pangpang-php8-apache
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "../:/var/www/html"
+      - "./apachePHP8/php.ini:/usr/local/etc/php/php.ini"
+      - "./apachePHP8/000-default.conf:/etc/apache2/sites-available/000-default.conf"
+    networks:
+      - lamp_network
+    depends_on:
+      - db
+
+  db:
+    container_name: pangpang_db
+    image: mysql:latest
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+      TZ: Asia/Taipei
+      LANG: C.UTF-8
+    networks:
+      - lamp_network
+    volumes:
+      - db:/var/lib/mysql
+
+volumes:
+  db:
