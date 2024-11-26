@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Bnb;
+use App\Models\Room;
+use App\Models\Order;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,11 +14,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        Bnb::factory(30)->create();
+        Room::factory(300)->create();
+        Order::factory(2500)->create();
     }
 }
