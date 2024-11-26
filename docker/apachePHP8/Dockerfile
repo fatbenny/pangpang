@@ -33,4 +33,3 @@ ENV TZ=Asia/Taipei
 RUN ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime && echo ${TZ} > /etc/timezone
 # RUN a2enmod ssl
 RUN a2enmod rewrite
-EXPOSE 9000
